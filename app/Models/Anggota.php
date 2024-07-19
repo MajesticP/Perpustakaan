@@ -7,9 +7,20 @@ use Illuminate\Database\Eloquent\Model;
 
 class Anggota extends Model
 {
-    use HasFactory;
+    protected $primaryKey = 'id_anggota';
+    protected $table = 'anggota';
+    protected $fillable = [
+        'nama',
+        'no_hp',
+        'alamat',
+        'email'
+    ];
 
-    protected $fillable = ['nama', 'no_hp', 'email', 'alamat'];
+    public function dataTambahanPeminjaman(){
+        return $this->hasOne(Anggota::class,'id_anggota');
+    }
 
-    protected $uniqueConstraints = ['no_hp', 'email'];
+    public function dataTambahanSanksi(){
+        return $this->hasOne(Anggota::class,'id_anggota');
+    }
 }
